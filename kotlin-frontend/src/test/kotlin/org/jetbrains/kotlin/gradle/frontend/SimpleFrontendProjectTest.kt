@@ -126,15 +126,12 @@ class SimpleFrontendProjectTest(gradleVersion: String, kotlinVersion: String) : 
         assertEquals(TaskOutcome.SUCCESS, result.task(":webpack-bundle")?.outcome)
 
         assertTrue { projectDir.root.resolve("build/js/script.js").isFile }
-        assertTrue { projectDir.root.resolve("build/js/min/script.js").isFile }
         assertTrue { projectDir.root.resolve("build/bundle/main.bundle.js").isFile }
 
         assertTrue { "unusedFunction1111" in projectDir.root.resolve("build/js/script.js").readText() }
-        assertTrue { "unusedFunction1111" !in projectDir.root.resolve("build/js/min/script.js").readText() }
         assertTrue { "unusedFunction1111" !in projectDir.root.resolve("build/bundle/main.bundle.js").readText() }
 
         assertTrue { "usedFunction2222" in projectDir.root.resolve("build/js/script.js").readText() }
-        assertTrue { "usedFunction2222" in projectDir.root.resolve("build/js/min/script.js").readText() }
         assertTrue { "usedFunction2222" in projectDir.root.resolve("build/bundle/main.bundle.js").readText() }
     }
 
@@ -521,7 +518,8 @@ class SimpleFrontendProjectTest(gradleVersion: String, kotlinVersion: String) : 
                 arrayOf("4.2.1", "1.1.51"),
                 arrayOf("4.3.1", "1.1.60"),
                 arrayOf("4.3.1", "1.2.0"),
-                arrayOf("4.4", "1.2.0")
+                arrayOf("4.4", "1.2.0"),
+                arrayOf("4.4.1", "1.2.21")
         )
     }
 }
